@@ -18,7 +18,7 @@
         margin: 0;
         padding: 0;
       }
-      .gm-style .controls {
+      .controls {
         font-size: 28px; /* this adjusts the size of all the controls */
 
         background-color: white;
@@ -34,12 +34,12 @@
         padding: 2px;
         width: 1em;
       }
-      .gm-style .controls button {
+      .controls button {
         border: 0;
         background-color: white;
         color: rgba(0, 0, 0, 0.6);
       }
-      .gm-style .controls button:hover {
+      .controls button:hover {
         color: rgba(0, 0, 0, 0.9);
       }
 
@@ -48,7 +48,7 @@
         flex-direction: column;
         height: auto;
       }
-      .gm-style .controls.zoom-control button {
+      .controls.zoom-control button {
         font: 0.85em Arial;
         margin: 1px;
         padding: 0;
@@ -85,9 +85,8 @@
         document.querySelector(".zoom-control-out").onclick = function() {
           map.setZoom(map.getZoom() - 1);
         };
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
-          document.querySelector(".zoom-control")
-        );
+
+        map.push(document.querySelector(".zoom-control"));
       }
     </script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" -->
