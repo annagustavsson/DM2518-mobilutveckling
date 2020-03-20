@@ -113,7 +113,6 @@
 			// };
 
 			function initZoomControl(map) {
-				console.log(1234);
 				document.querySelector(".zoom-control-in").onclick = function() {
 					map.setZoom(map.getZoom() + 1);
 				};
@@ -123,7 +122,6 @@
 			}
 
 			function initPanControl(map) {
-				console.log(123);
 				document.querySelector(".pan-control-north").onclick = function() {
 					map.panBy(0, -300);
 				};
