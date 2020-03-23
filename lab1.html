@@ -1,99 +1,163 @@
+
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0" />
+	<head>
+		<title>Simple Map</title>
+		<meta name="viewport" content="initial-scale=1.0" />
     <meta charset="utf-8" />
-    <style>
-      /* Always set the map height explicitly to define the size of the div
+    <link rel="icon" href='https://img.icons8.com/emoji/2x/bug-emoji.png'>
+		<style>
+			/* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 80vh;
-        width: 80vw;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .controls {
-        font-size: 28px; /* this adjusts the size of all the controls */
+			#map {
+				height: 80vh;
+				width: 80vw;
+			}
+			/* Optional: Makes the sample page fill the window. */
+			html,
+			body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			.controls {
+				font-size: 28px; /* this adjusts the size of all the controls */
 
-        background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-        box-sizing: border-box;
-        border-radius: 2px;
-        cursor: pointer;
-        font-weight: 300;
-        height: 1em;
-        margin: 6px;
-        text-align: center;
-        user-select: none;
-        padding: 2px;
-        width: 1em;
-      }
-      .controls button {
-        border: 0;
-        background-color: white;
-        color: rgba(0, 0, 0, 0.6);
-      }
-      .controls button:hover {
-        color: rgba(0, 0, 0, 0.9);
-      }
+				background-color: white;
+				box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+				box-sizing: border-box;
+				border-radius: 2px;
+				cursor: pointer;
+				font-weight: 300;
+				height: 1em;
+				margin: 6px;
+				text-align: center;
+				user-select: none;
+				padding: 2px;
+				width: 1em;
+			}
+			.controls button {
+				border: 0;
+				background-color: white;
+				color: rgba(0, 0, 0, 0.6);
+			}
+			.controls button:hover {
+				color: rgba(0, 0, 0, 0.9);
+			}
 
-      gm-style .controls.zoom-control {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-      }
-      .controls.zoom-control button {
-        font: 0.85em Arial;
-        margin: 1px;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <div>
-      <div class="controls zoom-control">
-        <button class="zoom-control-in" title="Zoom In">+</button>
-        <button class="zoom-control-out" title="Zoom Out">−</button>
-      </div>
-    </div>
+			.controls.zoom-control {
+				display: flex;
+				flex-direction: column;
+				height: auto;
+			}
+			.controls.zoom-control button {
+				font: 0.85em Arial;
+				margin: 1px;
+				padding: 0;
+			}
 
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: 59.3498092, lng: 18.0684758 }, // Location: KTH
-          //center: { lat: 59.341744, lng: 18.0620933 }, // Location: Jarlaplan, 45° tilt avaliable.
-          zoom: 17,
-          mapTypeId: "satellite", // Avaliable options: satellite, roadmap, hybrid
-          disableDefaultUI: true
+			.controls.pan-control {
+				display: flex;
+				flex-direction: column;
+				height: auto;
+			}
+
+			.controls.pan-control button {
+				font: 0.85em Arial;
+				margin: 1px;
+				padding: 0;
+				color: blue;
+			}
+
+			.controls .pan-control-west {
+				background-color: lightsteelblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<div>
+			<div class="controls zoom-control">
+				<button class="zoom-control-in" title="Zoom In">+</button>
+				<button class="zoom-control-out" title="Zoom Out">−</button>
+			</div>
+			<div class="controls pan-control">
+				<button class="pan-control-north" title="Pan West">N</button>
+				<button class="pan-control-east" title="Pan West">E</button>
+				<button class="pan-control-south" title="Pan West">S</button>
+				<button class="pan-control-west" title="Pan West">W</button>
+			</div>
+		</div>
+
+		<script>
+			var map;
+			function initMap() {
+				map = new google.maps.Map(document.getElementById("map"), {
+					center: new google.maps.LatLng(59.3498092, 18.0684758), // Location: KTH
+					//center: { lat: 59.341744, lng: 18.0620933 }, // Location: Jarlaplan, 45° tilt avaliable.
+					zoom: 17,
+					mapTypeId: "satellite", // Avaliable options: satellite, roadmap, hybrid
+					disableDefaultUI: true,
+          fullscreenControl: true
+				});
+				//map.setTilt(45);
+				initZoomControl(map);
+				initPanControl(map);
+        const marker = new google.maps.Marker({
+        position: {lat: 59.341744, lng: 18.0620933},
+        map: map,
+        title: 'Jarlaplan'
         });
-        //map.setTilt(45);
-        initZoomControl(map);
-      }
 
-      function initZoomControl(map) {
-        document.querySelector(".zoom-control-in").onclick = function() {
-          map.setZoom(map.getZoom() + 1);
-        };
-        document.querySelector(".zoom-control-out").onclick = function() {
-          map.setZoom(map.getZoom() - 1);
-        };
+        const marker2 = new google.maps.Marker({
+        position: {lat: 59.3455221, lng: 18.0522414},
+		map: map,
+        title: 'Mahalo',
+		draggable:true,
+   		animation: google.maps.Animation.DROP,
+    	//position: results[0].geometry.location
+			
+        });
 
-        map.push(document.querySelector(".zoom-control"));
-      }
-    </script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?&callback=initMap"
-      async
-      defer
-    ></script>
-  </body>
+		const marker3 = new google.maps.Marker({
+        position: {lat: 59.3399278, lng: 17.9705505},
+        map: map,
+        title: 'Fin strand'
+
+        });
+			}
+
+
+
+			function initZoomControl(map) {
+				document.querySelector(".zoom-control-in").onclick = function() {
+					map.setZoom(map.getZoom() + 1);
+				};
+				document.querySelector(".zoom-control-out").onclick = function() {
+					map.setZoom(map.getZoom() - 1);
+				};
+			}
+
+			function initPanControl(map) {
+				document.querySelector(".pan-control-north").onclick = function() {
+					map.panBy(0, -300);
+				};
+				document.querySelector(".pan-control-east").onclick = function() {
+					map.panBy(300, 0);
+				};
+				document.querySelector(".pan-control-south").onclick = function() {
+					map.panBy(0, 300);
+				};
+				document.querySelector(".pan-control-west").onclick = function() {
+					map.panBy(-300, 0);
+				};
+			}
+		</script>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?&callback=initMap"
+			async
+			defer
+		></script>
+	</body>
 </html>
