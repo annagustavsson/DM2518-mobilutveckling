@@ -33,6 +33,12 @@
 			<div class = "controls geo-control">
 				<button class="buttonHere">My position</button>
 			</div>
+			<div>
+				<button class="mahalo">Mahalo</button>
+				<button class="kth">KTH</button>
+				<button class="hornsberg">Hornsberg</button>
+				<button class="jarlaplan">Jarlaplan</button>
+			</div>
 		</div>
 		<script>
 			var map;
@@ -52,6 +58,8 @@
 				initZoomControl(map);
 				initPanControl(map);
 				getGeoLocation(map);
+				getLocation(map);
+			
 
 				var MahaloString = '<div id="content">'+
                 '<div id="siteNotice">'+
@@ -140,6 +148,30 @@
 					map.panBy(-300, 0);
 				};
 			}
+
+			function getLocation(map, location) {
+				document.querySelector(".mahalo").onclick = function(){
+					var pos = { lat: 59.3455221, lng: 18.0522414 };
+					map.setCenter(pos);
+				};
+
+				document.querySelector(".jarlaplan").onclick = function(){
+					var pos =  { lat: 59.341744, lng: 18.0620933 };
+					map.setCenter(pos);
+				};
+
+				document.querySelector(".hornsberg").onclick = function(){
+					var pos =  { lat: 59.3399278, lng: 17.9705505 };
+					map.setCenter(pos);
+				};
+
+				document.querySelector(".kth").onclick = function(){
+					var pos = { lat: 59.3498092, lng: 18.0684758 };
+					map.setCenter(pos);
+				};
+
+
+			};
 
 			function getGeoLocation(map){
 				document.querySelector(".buttonHere").onclick = function() {
