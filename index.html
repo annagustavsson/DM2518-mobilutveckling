@@ -33,11 +33,11 @@
 			<div class = "controls geo-control">
 				<button class="buttonHere">My position</button>
 			</div>
-			<div>
-				<button class="mahalo">Mahalo</button>
-				<button class="kth">KTH</button>
-				<button class="hornsberg">Hornsberg</button>
-				<button class="jarlaplan">Jarlaplan</button>
+			<div class="controls location">
+				<button class="mahalo" title="Mahalo">Mahalo</button>
+				<button class="kth" title="KTH">KTH</button>
+				<button class="hornsberg" title="Hornsberg">Horns- berg</button>
+				<button class="jarlaplan" title="Jarlaplan">Jarla-plan</button>
 			</div>
 		</div>
 		<script>
@@ -69,10 +69,50 @@
                 '<p><b>Mahalo</b>, is a nice coffee place.'+
                 '</p></div>'                
                 '</div>';
+
+				var HornsbergString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">Hornsberg</h1>'+
+                '<div id="bodyContent">'+
+                '<p><b>Hornsberg</b>, has a beautiful beach.'+
+                '</p></div>'                
+                '</div>';
+
+				var kthString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">KTH</h1>'+
+                '<div id="bodyContent">'+
+                '<p><b>KTH</b>, Royal Institute of design, is a very attractive university.'+
+				'<p>The UNI is located in Stockholm.<p>'+
+                '</p></div>'                
+                '</div>';
+
+				var jarlaString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">Jarlaplan</h1>'+
+                '<div id="bodyContent">'+
+                '<p><b>Jarlaplan</b>, is located in Stockholm. '+
+                '</p></div>'                
+                '</div>';
                 
                 var mahaloWindow = new google.maps.InfoWindow({
                 content: MahaloString
                 });
+
+				var hornsbergWindow = new google.maps.InfoWindow({
+					content: HornsbergString
+				});
+
+				var kthWindow = new google.maps.InfoWindow({
+					content: kthString
+				});
+
+				var jarlaWindow = new google.maps.InfoWindow({
+					content: jarlaString
+				});
 
 				const homeMarker = new google.maps.Marker({
 					position: { lat: 59.3498092, lng: 18.0684758 },
@@ -80,7 +120,10 @@
 					title: "KTH",
 					animation: google.maps.Animation.DROP,
 				});
-				homeMarker.addListener('click', toggleBounce);
+				//homeMarker.addListener('click', toggleBounce);
+				homeMarker.addListener('click', function() {
+                kthWindow.open(map, homeMarker);
+                });
 
 				const marker = new google.maps.Marker({
 					position: { lat: 59.341744, lng: 18.0620933 },
@@ -90,6 +133,9 @@
                		url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
                 }
 				});
+				marker.addListener('click', function() {
+                jarlaWindow.open(map, marker);
+                });
 
 				const marker2 = new google.maps.Marker({
 					position: { lat: 59.3455221, lng: 18.0522414 },
@@ -114,7 +160,11 @@
 					icon: {
                		url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
                 }
+				
 				});
+				marker3.addListener('click', function() {
+                hornsbergWindow.open(map, marker3);
+                });
 
 			}
 			function toggleBounce() {
@@ -207,7 +257,6 @@
 					hereWindow.open(map);
       }
 			
-
 		</script>
 		<script
 			src="https://maps.googleapis.com/maps/api/js?&callback=initMap"
