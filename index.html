@@ -6,6 +6,7 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="https://img.icons8.com/emoji/2x/bug-emoji.png" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
 	</head>
 	<body>
 		<div id="map"></div>
@@ -25,8 +26,25 @@
 				<button class="pan-control-east" title="Pan East">&rarr;</button>
 			</div>
 		</div>
-
 		<script>
+			function hideAddressBar() {
+				if (!window.location.hash) {
+					if (document.height < window.outerHeight) {
+						document.body.style.height = window.outerHeight + 50 + "px";
+					}
+
+					setTimeout(function() {
+						window.scrollTo(0, 1);
+					}, 50);
+				}
+			}
+
+			window.addEventListener("load", function() {
+				if (!window.pageYOffset) {
+					hideAddressBar();
+				}
+			});
+			window.addEventListener("orientationchange", hideAddressBar);
 			var map;
 			function initMap() {
 				map = new google.maps.Map(document.getElementById("map"), {
@@ -36,6 +54,9 @@
 					mapTypeId: "satellite", // Avaliable options: satellite, roadmap, hybrid
 					disableDefaultUI: true,
 					fullscreenControl: true
+					//plist = {UIStatusBarHidden = true }
+					//UIStatusBarHidden: true
+					//setStatusBarHidden: YES
 				});
 				//map.setTilt(45);
 				initZoomControl(map);
