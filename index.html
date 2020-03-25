@@ -66,6 +66,21 @@
 				//map.setTilt(45);
 				initZoomControl(map);
 				initPanControl(map);
+
+				var MahaloString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">Mahalo</h1>'+
+                '<div id="bodyContent">'+
+                '<p><b>Mahalo</b>, is a nice coffee place.'+
+                '</p></div>'                
+                '</div>';
+                
+                var infowindow = new google.maps.InfoWindow({
+                content: MahaloString
+                });
+
+
 				const marker = new google.maps.Marker({
 					position: { lat: 59.341744, lng: 18.0620933 },
 					map: map,
@@ -84,8 +99,17 @@
 				const marker3 = new google.maps.Marker({
 					position: { lat: 59.3399278, lng: 17.9705505 },
 					map: map,
-					title: "Fin strand"
+					title: "Fin strand",
+					icon: {
+               		url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                }
+
 				});
+
+				marker.addListener('click', function() {
+                infowindow.open(map, marker2);
+                });
+
 			}
 
 			function initZoomControl(map) {
