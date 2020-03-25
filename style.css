@@ -69,3 +69,13 @@ body {
 .controls .pan-control-west {
 	background-color: lightsteelblue;
 }
+
+.controls .buttonHere {
+	font: 0.85em Arial;
+	margin: 0px;
+	padding: 0;
+	background-color: #95e999;
+	box-shadow: 0px 5px 0px 0px #269c2b;
+	font-size: 10px;
+
+}

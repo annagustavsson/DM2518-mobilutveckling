@@ -30,29 +30,11 @@
 				<button class="pan-control-west" title="Pan West">&larr;</button>
 				<button class="pan-control-east" title="Pan East">&rarr;</button>
 			</div>
-			<div class = "hereButton">
-				<button class="buttonHere">Here</button>
+			<div class = "controls geo-control">
+				<button class="buttonHere">My position</button>
 			</div>
 		</div>
 		<script>
-			function hideAddressBar() {
-				if (!window.location.hash) {
-					if (document.height < window.outerHeight) {
-						document.body.style.height = window.outerHeight + 50 + "px";
-					}
-
-					setTimeout(function() {
-						window.scrollTo(0, 1);
-					}, 50);
-				}
-			}
-
-			window.addEventListener("load", function() {
-				if (!window.pageYOffset) {
-					hideAddressBar();
-				}
-			});
-			window.addEventListener("orientationchange", hideAddressBar);
 			var map;
 			function initMap() {
 				map = new google.maps.Map(document.getElementById("map"), {
