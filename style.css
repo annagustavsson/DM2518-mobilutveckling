@@ -1,0 +1,63 @@
+#map {
+	height: 80vh;
+	width: 80vw;
+}
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+.controls {
+	font-size: 28px; /* this adjusts the size of all the controls */
+
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+	box-sizing: border-box;
+	border-radius: 2px;
+	cursor: pointer;
+	font-weight: 300;
+	height: 1em;
+	margin: 6px;
+	text-align: center;
+	user-select: none;
+	padding: 2px;
+	width: 1em;
+}
+.controls button {
+	border: 0;
+	background-color: white;
+	color: rgba(0, 0, 0, 0.6);
+}
+.controls button:hover {
+	color: rgba(0, 0, 0, 0.9);
+}
+
+.controls.zoom-control {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+}
+.controls.zoom-control button {
+	font: 0.85em Arial;
+	margin: 1px;
+	padding: 0;
+}
+
+.controls.pan-control {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+}
+
+.controls.pan-control button {
+	font: 0.85em Arial;
+	margin: 1px;
+	padding: 0;
+	color: blue;
+}
+
+.controls .pan-control-west {
+	background-color: lightsteelblue;
+}
